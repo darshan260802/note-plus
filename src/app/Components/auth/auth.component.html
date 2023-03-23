@@ -1,0 +1,28 @@
+<tui-island textAlign="center"    size="l" class="tui-col_md-3" >
+    <form [formGroup]="UserForm"  >
+    <span class="tui-text_h6" >Login <tui-toggle [showIcons]="true" formControlName="isSignup" size="l"></tui-toggle> Signup</span>
+    <p class="tui-text_h2" >{{isSignup ? "Sign up" : "Login"}}</p>
+
+        <tui-input formControlName="name" *ngIf="isSignup"  >
+            Name
+            <input tuiTextfield>
+        </tui-input>
+        <tui-input formControlName="email" >
+            Email
+            <input tuiTextfield inputmode="email">
+        </tui-input>
+        <tui-input-password formControlName="password" >
+            Password
+            <input tuiTextfield inputmode="latin-name">
+        </tui-input-password>
+        <tui-checkbox-block
+            formControlName="remember"
+            contentAlign="left"
+            size="s"
+        >
+            Remember Me
+            
+        </tui-checkbox-block>
+        <button tuiButton [showLoader]="isLoading" (click)="handleSubmit()" >{{isSignup ? "Sign up" : "Login"}}</button>
+    </form>
+</tui-island>
