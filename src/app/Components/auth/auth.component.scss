@@ -1,31 +1,32 @@
-tui-island{
+tui-island {
     transition: all 500ms ease;
-        box-shadow: 20px 20px 60px #bebebe,-20px -20px 60px #ffffff;
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
     background-color: var(--tui-primary-content);
     outline: 0;
     margin: auto;
+    margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  gap: 20px;
+  tui-toggle {
+    margin-inline: 10px;
+  }
+  form {
     display: flex;
     flex-direction: column;
-    min-width: 300px;
     gap: 20px;
-    tui-toggle{
-        margin-inline: 10px;
+    align-items: flex-start;
+    tui-input,
+    tui-input-password {
+      width: 100%;
     }
-    form{
-        
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-        tui-input,tui-input-password{
-            width: 100%;
-        }
-        [tuiButton]{
-            width: 100%;
-        }
-        span{
-            display: inline-block;
-            padding: 10px;
-        }
+    [tuiButton] {
+      width: 100%;
     }
+    span {
+      display: inline-block;
+      padding: 10px;
+    }
+  }
 }

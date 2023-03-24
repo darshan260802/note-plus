@@ -10,7 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   async ngOnInit(): Promise<void> {
-    console.log('Fired Autologin');
-    console.log(await this.authService.getAutoLogin());
+    await this.authService.getAutoLogin();
   }
 }

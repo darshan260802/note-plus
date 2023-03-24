@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Shared/auth.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class AuthComponent implements OnInit {
     isSignup: new FormControl(this.isSignup),
   });
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
   ngOnInit(): void {
     this.UserForm.get('isSignup')?.valueChanges.subscribe(
       (newVal: boolean | null) => {
@@ -47,7 +48,11 @@ export class AuthComponent implements OnInit {
         .then((data) => {
           data.subscribe((loader: boolean) => {
             this.isLoading = loader;
-            this.UserForm.reset({ isSignup: true, remember: true });
+            // this.UserForm.reset({ isSignup: true, remember: true });
+            this.UserForm.controls['name'].reset();
+            this.UserForm.controls['email'].reset();
+            this.UserForm.controls['password'].reset();
+            this.router.navigate(['dashboard']);
           });
         });
     } else {
@@ -65,9 +70,14 @@ export class AuthComponent implements OnInit {
         .then((data) => {
           data.subscribe((loader: boolean) => {
             this.isLoading = loader;
-            this.UserForm.reset({ isSignup: true, remember: true });
+            // this.UserForm.reset({ isSignup: true, remember: true });
+            this.UserForm.controls['email'].reset();
+            this.UserForm.controls['password'].reset(); 
+            this.router.navigate(['dashboard']);
           });
         });
     }
   }
+
+  
 }

@@ -15,9 +15,10 @@ interface User {
 }
 
 interface LoggedUser {
-  id: string;
+  userId: string;
   name: string;
   email: string;
+  iat?: any;
 }
 
 @Injectable({
@@ -25,13 +26,14 @@ interface LoggedUser {
 })
 export class AuthService {
   private secret = 'NOTE_PLUS_DHP';
-  private userId = '';
   private loaderStatus: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private currentUser: LoggedUser = {
-    id: '',
+    userId: '',
     name: '',
     email: '',
   };
+
+  
 
   constructor(private http: HttpClient, private auth: Auth) {}
 
@@ -45,7 +47,6 @@ export class AuthService {
       payload: {},
     };
     this.loaderStatus.next(true);
-
     await createUserWithEmailAndPassword(this.auth, user.email, user.password)
       .then((data) => {
         body['payload'] = {userId: data.user.uid, name: user.name, email: user.email};
@@ -57,8 +58,8 @@ export class AuthService {
             } else {
               sessionStorage.setItem('authToken', token as string);
             }
-
-            this.currentUser['id'] = data.user.uid;
+            
+            this.currentUser['userId'] = data.user.uid;
             this.currentUser['name'] = user.name as string;
             this.currentUser['email'] = user.email;
             console.log(this.currentUser);
@@ -99,9 +100,8 @@ export class AuthService {
             } else {
               sessionStorage.setItem('authToken', token as string);
             }
-            this.userId = data.user.uid as string;
 
-            this.currentUser['id'] = data.user.uid;
+            this.currentUser['userId'] = data.user.uid;
             this.currentUser['name'] = data.user.displayName as string;
             this.currentUser['email'] = user.email;
             console.log(this.currentUser);
@@ -156,6 +156,8 @@ export class AuthService {
   }
 
   getUser(): LoggedUser{
+    console.log('called', this.currentUser);
+    
     return this.currentUser;
   }
 }

@@ -22,9 +22,10 @@ import { TuiCheckboxBlockModule, TuiInputModule, TuiInputPasswordModule, TuiIsla
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './Components/auth/auth.component';
 import {HttpClientModule} from '@angular/common/http';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent],
+  declarations: [AppComponent, AuthComponent, DashboardComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
